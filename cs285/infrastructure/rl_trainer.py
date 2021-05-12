@@ -4,6 +4,8 @@ import os
 import sys
 import time
 
+from tqdm import tqdm_notebook
+
 import gym
 from gym import wrappers
 import numpy as np
@@ -135,7 +137,7 @@ class RL_Trainer(object):
 
         print_period = 1000 # if isinstance(self.agent, DQNAgent) else 1
 
-        for itr in range(n_iter):
+        for itr in tqdm_notebook(range(n_iter), desc='Training'):
             if itr % print_period == 0:
                 print("\n\n********** Iteration %i ************"%itr)
 
