@@ -425,7 +425,6 @@ class LunarLander(gym.Env):
         return self._render(mode, close)
 
 
-
 class LunarLanderContinuous(LunarLander):
    continuous = True
 
