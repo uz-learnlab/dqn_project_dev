@@ -405,8 +405,8 @@ class LunarLander(gym.Env, EzPickle):
                     maskBits=0x001)
                 )
             leg.ground_contact = False
-            leg.color1 = (0.5,0.4,0.9)
-            leg.color2 = (0.3,0.3,0.5)
+            leg.color1 = (128, 102, 230)
+            leg.color2 = (77, 77, 128)
             rjd = revoluteJointDef(
                 bodyA=self.lander,
                 bodyB=leg,
