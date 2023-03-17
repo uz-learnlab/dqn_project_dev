@@ -53,27 +53,23 @@ class RL_Trainer(object):
         # Make the gym environment
         register_custom_envs()
         self.env = gym.make(self.params['env_name'])
+        if self.params['video_log_freq'] > 0:
+            self.episode_trigger = lambda episode: episode % self.params['video_log_freq'] == 0
+        else:
+            self.episode_trigger = lambda episode: False
         if 'env_wrappers' in self.params:
             # These operations are currently only for Atari envs
-            self.env = wrappers.Monitor(
-                self.env,
-                os.path.join(self.params['logdir'], "gym"),
-                force=True,
-                video_callable=(None if self.params['video_log_freq'] > 0 else False),
-            )
+            self.env = wrappers.RecordEpisodeStatistics(self.env, deque_size=1000)
+            self.env = ReturnWrapper(self.env)
+            self.env = wrappers.RecordVideo(self.env, os.path.join(self.params['logdir'], "gym"), episode_trigger=self.episode_trigger)
             self.env = params['env_wrappers'](self.env)
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
         if 'non_atari_colab_env' in self.params and self.params['video_log_freq'] > 0:
-            self.env = wrappers.Monitor(
-                self.env,
-                os.path.join(self.params['logdir'], "gym"),
-                force=True,
-                video_callable=(None if self.params['video_log_freq'] > 0 else False),
-            )
+            self.env = wrappers.RecordVideo(self.env, os.path.join(self.params['logdir'], "gym"), episode_trigger=self.episode_trigger)
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
-
+            
         self.env.seed(seed)
 
         # import plotting (locally if 'obstacles' env)
