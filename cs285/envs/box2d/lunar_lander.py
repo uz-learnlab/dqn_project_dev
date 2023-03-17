@@ -431,7 +431,7 @@ class LunarLander(gym.Env, EzPickle):
         if self.render_mode == "human":
             self.render()
 
-        return self.step(NOOP)[0], {}
+        return self.step(NOOP)[0]
 
     def _create_particle(self, mass, x, y, ttl):
         p = self.world.CreateDynamicBody(
