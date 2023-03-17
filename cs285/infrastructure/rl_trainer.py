@@ -4,6 +4,8 @@ import os
 import sys
 import time
 
+from cs285.infrastructure.atari_wrappers import ReturnWrapper
+
 from tqdm import tqdm_notebook
 
 import gym
