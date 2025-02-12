@@ -1,6 +1,6 @@
 import numpy as np
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 
 class ReturnWrapper(gym.Wrapper):
     def get_episode_rewards(self):

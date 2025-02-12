@@ -8,8 +8,8 @@ from cs285.infrastructure.atari_wrappers import ReturnWrapper
 
 from tqdm import tqdm_notebook
 
-import gym
-from gym import wrappers
+import gymnasium as gym
+from gymnasium import wrappers
 import numpy as np
 import torch
 from cs285.infrastructure import pytorch_util as ptu
