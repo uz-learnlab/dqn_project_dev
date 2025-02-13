@@ -4,7 +4,7 @@ from gymnasium import spaces
 
 class ReturnWrapper(gym.Wrapper):
     def __init__(self, env):
-        gym.Wrapper.__init__(self, env)
+        super(ReturnWrapper,self).__init__(self, env)
 
     def get_episode_rewards(self):
         return list(self.env.return_queue)

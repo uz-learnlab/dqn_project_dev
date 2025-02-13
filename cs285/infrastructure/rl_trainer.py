@@ -62,9 +62,9 @@ class RL_Trainer(object):
         if 'env_wrappers' in self.params:
             # These operations are currently only for Atari envs
             self.env = wrappers.RecordEpisodeStatistics(self.env, 1000)
-            self.env = ReturnWrapper(self.env)
             self.env = wrappers.RecordVideo(self.env, os.path.join(self.params['logdir'], "gym"), episode_trigger=self.episode_trigger)
             self.env = params['env_wrappers'](self.env)
+            self.env = ReturnWrapper(self.env)
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
         if 'non_atari_colab_env' in self.params and self.params['video_log_freq'] > 0:
@@ -202,7 +202,7 @@ class RL_Trainer(object):
     def perform_dqn_logging(self, all_logs):
         last_log = all_logs[-1]
 
-        episode_rewards = self.env.env.get_episode_rewards()
+        episode_rewards = self.env.get_episode_rewards()
         if len(episode_rewards) > 0:
             self.mean_episode_reward = np.mean(episode_rewards[-100:])
         if len(episode_rewards) > 100:
