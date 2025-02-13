@@ -143,7 +143,8 @@ class ProcessFrame84(gym.Wrapper):
         return _process_frame84(obs), reward, done, trunc, info
 
     def reset(self, **kwargs):
-        return _process_frame84(self.env.reset(**kwargs))
+        obs, info = self.env.reset(**kwargs)
+        return _process_frame84(obs), info
 
 
 class ClipRewardEnv(gym.RewardWrapper):
