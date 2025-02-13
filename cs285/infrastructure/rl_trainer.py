@@ -54,7 +54,7 @@ class RL_Trainer(object):
 
         # Make the gym environment
         register_custom_envs()
-        self.env = gym.make(self.params['env_name'])
+        self.env = gym.make(self.params['env_name'], render_mode="rgb_array")
         if self.params['video_log_freq'] > 0:
             self.episode_trigger = lambda episode: episode % self.params['video_log_freq'] == 0
         else:
