@@ -202,7 +202,7 @@ class RL_Trainer(object):
     def perform_dqn_logging(self, all_logs):
         last_log = all_logs[-1]
 
-        episode_rewards = self.env.get_episode_rewards()
+        episode_rewards = self.env.env.get_episode_rewards()
         if len(episode_rewards) > 0:
             self.mean_episode_reward = np.mean(episode_rewards[-100:])
         if len(episode_rewards) > 100:
