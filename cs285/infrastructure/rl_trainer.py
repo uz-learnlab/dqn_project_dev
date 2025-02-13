@@ -72,7 +72,7 @@ class RL_Trainer(object):
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
             
-        self.env.seed(seed)
+        self.env.reset(seed=seed)
 
         # import plotting (locally if 'obstacles' env)
         if not(self.params['env_name']=='obstacles-cs285-v0'):
