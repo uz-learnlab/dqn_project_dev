@@ -61,9 +61,9 @@ class RL_Trainer(object):
             self.episode_trigger = lambda episode: False
         if 'env_wrappers' in self.params:
             # These operations are currently only for Atari envs
-            self.env = wrappers.RecordEpisodeStatistics(self.env, 1000)
             self.env = wrappers.RecordVideo(self.env, os.path.join(self.params['logdir'], "gym"), episode_trigger=self.episode_trigger)
             self.env = params['env_wrappers'](self.env)
+            self.env = wrappers.RecordEpisodeStatistics(self.env, 1000)
             self.env = ReturnWrapper(self.env)
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
